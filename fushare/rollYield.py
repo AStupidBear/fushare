@@ -122,7 +122,10 @@ def get_rollYield(date = None, var = 'IF',symbol1 = None, symbol2 = None, df = N
         df = df[df['variety'] == var].sort_values('open_interest',ascending=False)
         df['close']=df['close'].astype('float')
         symbol1 = df['symbol'].tolist()[0]
-        symbol2 = df['symbol'].tolist()[1]
+        if len(df) > 1:
+            symbol2 = df['symbol'].tolist()[1]
+        else:
+            symbol2 = symbol1
 
     close1 = df['close'][df['symbol'] == symbol1.upper()].tolist()[0]
     close2 = df['close'][df['symbol'] == symbol2.upper()].tolist()[0]
