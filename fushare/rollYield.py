@@ -118,6 +118,7 @@ def get_rollYield(date = None, var = 'IF',symbol1 = None, symbol2 = None, df = N
         market = symbolMarket(var)
         df = get_future_daily(start=date, end=date, market=market)
     if var:
+        df = df.replace('', 0).astype('float64', errors = 'ignore')
         df = df[df['variety'] == var].sort_values('open_interest',ascending=False)
         df['close']=df['close'].astype('float')
         symbol1 = df['symbol'].tolist()[0]
